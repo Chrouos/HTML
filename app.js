@@ -1,2 +1,2 @@
 var http = require(“http”)
-vat path = require("path")
+var path = require("path")
