@@ -77,13 +77,6 @@ app.post("/PostenterRoom", function(request, response) {
 
 // --------------------------- //
 
-// 當不知道什麼網頁的時候
-app.use(function(request, response) {
-  response.status(404).render("404");
-});
-
-// --------------------------- //
-
 // API
 var api = require('./apiroutes'); 
 app.use('/api', api);
@@ -92,6 +85,14 @@ var v2 = require('./v2routes');
 app.use('/v2', v2);
 
 // --------------------------- //
+
+// --------------------------- //
+
+// 當不知道什麼網頁的時候
+app.use(function(request, response) {
+  response.status(404).render("404");
+});
+
 
 // 設定 port 為 3000
 http.createServer(app).listen(3000, function() {
