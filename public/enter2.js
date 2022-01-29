@@ -49,7 +49,7 @@ function inputChat(entries){
 function pushChenContent(){
 
   var $inputPart = $("#inputPart");
-
+  
   // 按下enter
    $inputPart.keydown(function (e){
     if(e.keyCode == 13){
@@ -75,7 +75,7 @@ function pushChenContent(){
         success: function (data){
           
           // data.entries.push({roomNo:1234, user:'C', chatContent: $inputPart.val() })
-          console.log(data);
+          // console.log(data);
           // console.log( $inputPart.val())
           $inputPart.val('') // 清空內容
         },
@@ -99,7 +99,7 @@ function reload(){
     // timeout: 15000, //請求限時，單位是毫秒
     error: function() {},
     success: function(data) {
-      if(data.success) console.log(data );
+      //if(data.success) console.log(data );
       if(data.success) {
         showEntriesChat(data.entries);     
         // inputChat(data.entries);      

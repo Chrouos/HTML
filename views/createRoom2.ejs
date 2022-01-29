@@ -11,7 +11,7 @@
     }
 </script>
 
-<header class="masthead">
+<section class="masthead">
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
             <div class="text-center">
@@ -51,21 +51,38 @@
 
                     <br><br>
 
-                    <!-- <script>
-                    document.write(document.getElementById("roomNo").textContent)
-                </script> -->
+                    <script>
+                        // document.write(document.getElementById("roomNo").textContent)
+                    </script>
 
                     <a class="btn btn-outline-light" href="/">
                         <font size="5">回到大廳</font>
                     </a>
                     <button name='buttonIn' class="btn btn-outline-light" type="submit">
-                        <font size="5" href="/enterRoom">進入房間</font>
+                        <font size="5">進入房間</font>
                     </button>
                 </form>
 
-                <!-- <a class='text-white'> <% entries.forEach(function(entry) { %> <%= entry.roomNo %> <% }) %> </a> -->
             </div>
         </div>
     </div>
-</header>
+
+    <script type="text/javascript">
+        function getRoomNo() {
+            // var pathName = location.pathname; // 網址內
+            // var re = /\d{2,8}/ // 正規法 數字二到八個
+            var roomNo = document.getElementById("roomNo").value
+
+            // alert(roomNo);
+            nextPath = "/v2/" + roomNo;
+            // alert(nextPath);
+            // return nextPath;
+            window.location.href = nextPath;
+        }
+    </script>
+
+</section>
+
+
+
 <%- include('footer'); -%>

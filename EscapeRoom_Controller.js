@@ -19,6 +19,8 @@ exports.create_an_entry = function(req, res) {
   req.app.locals.entries.push(new_entry);
   console.log( 'Create new entry');
 
+  // var roomNo = req.Path
+
   res.json({
     success:true,
   })

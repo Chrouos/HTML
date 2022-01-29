@@ -18,7 +18,7 @@ v2.get("/:roomNo", function(request, response) { // localhost:3000/v2
 
     console.log(entryIndex)
     if(entryIndex!=-1 && times == false){
-      response.render("enterRoom", 
+      response.render("enterRoom2", 
             { roomNo:request.params.roomNo,
               user: entries[entryIndex].user,
               chatContent: entries[entryIndex].chatContent});
@@ -29,6 +29,9 @@ v2.get("/:roomNo", function(request, response) { // localhost:3000/v2
     response.status(404).render("404");
 
 });
+
+
+
 
 v2.get("/:roomNo/A", function(request, response) {
 
@@ -58,6 +61,9 @@ v2.get("/:roomNo/A", function(request, response) {
     response.status(404).render("404");
 });
 
+
+
+
 v2.get("/:roomNo/B", function(request, response) {
 
  var entryIndex = -1;
@@ -86,4 +92,31 @@ v2.get("/:roomNo/B", function(request, response) {
     response.status(404).render("404");
 });
 
+
+
+
+
+// v2.get("/A/:123", function(request, response) { // localhost:300/v2
+
+//   response.render("A");
+
+// });
+
 module.exports = v2;
+
+
+
+
+// 初始狀態
+// v2.get("/", function(request, response) { // localhost:300/v2
+//   response.render("enterRoom2");
+// });
+
+// v2.get("/A", function(request, response) { // http://localhost:3000/v2/A
+//   response.render("A");
+// });
+
+// v2.get("/B", function(request, response) { // http://localhost:3000/v2/B
+//   response.render("B");
+// });
+// 初始狀態結束

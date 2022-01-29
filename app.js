@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 
 var app = express();
 
-// 設定位置 // 
+// 設定位置
 app.use('/css', express.static(__dirname + '/public/css'))
 app.use('/public', express.static(__dirname + '/public'))
 
@@ -16,7 +16,7 @@ app.set("view engine", "ejs");
 
 // --------------------------- //
 
-// 準備儲存的空間，預設有兩個房間為 1234 及 5678
+// 準備儲存的空間
 var entries = [{roomNo:1234, user: "上天大人", chatContent: "你們被不小心困在這裡了，請同心協力一起離開！這裡是留言板，好好溝通吧！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾"},{roomNo:5678, user: "上天大人", chatContent: "這是上天大人的秘密小房間，呵呵"}]
 
 app.locals.entries = entries;
@@ -30,20 +30,16 @@ app.get("/", function(request, response) {
   response.render("index" , { info: 'This is lobby'});
 });
 
-// --------------------------- //
-
 // 輸入房號
 app.get("/inputRoomNo", function(request, response) {
   response.render("inputRoomNo" , { info: 'This is inputRoomNo'});
+
 });
 
-// --------------------------- //
-
-// 創建房間 GET
+// 創建房間
 app.get("/createRoom", function(request, response) {
-  response.render("createRoom" , { info: 'This is createRoom'});
+  response.render("createRoom2" , { info: 'This is createRoom'});
 });
-// 創建房間 POST
 app.post('/PostcreateRoom', function (request, response) {
     //接收資料
   entries.push({
@@ -53,17 +49,62 @@ app.post('/PostcreateRoom', function (request, response) {
 	});
 
   var path = '/v2/'+ request.body.roomNo
+
   response.redirect(path)
   response.render(path)
+  // res.render('createRoom')
 })
 
-// --------------------------- //
 
-// 進入房間 GET
+app.post('/PostEnterRoom2', function (request, response) {
+
+    //接收資料
+  entries.push({
+    roomNo: request.body.roomNo,
+    user: "公共場合使用者",
+    chatContent: request.body.chatContent
+	});
+
+    var path = 'v2/' + request.body.roomNo;
+    response.redirect(path)
+    response.render(path)
+  
+
+})
+
+// app.post('/PostEnterRoomA', function (request, response) {
+
+//    //接收資料
+//   entries.push({
+//     roomNo: request.body.roomNo,
+//     user: "A",  
+//     chatContent: request.body.chatContent
+// 	});
+
+//     var path = 'v2/' + request.body.roomNo + '/A';
+//     response.redirect(path)
+//     response.render(path)
+  
+// })
+
+app.post('/PostEnterRoomB', function (request, response) {
+   //接收資料
+  entries.push({
+    roomNo: request.body.roomNo,
+    user: "B",
+    chatContent: request.body.chatContent
+	});
+
+    var path = 'v2/' + request.body.roomNo + '/B';
+    response.redirect(path)
+    response.render(path)
+})
+
+
+// 進入房間
 app.get("/enterRoom", function(request, response) {
   response.render("enterRoom" , { info: 'This is inside the Room'});
 });
-// 進入房間 POST
 app.post("/PostenterRoom", function(request, response) {
    //接收資料
   entries.push({
@@ -72,10 +113,25 @@ app.post("/PostenterRoom", function(request, response) {
 
   response.redirect('enterRoom')
   response.render('enterRoom')
-
+  // res.render('createRoom')
 });
 
-// --------------------------- //
+
+// test
+app.get('/test', function (req, res) {
+    res.render('test')
+    console.log(req.body) 
+})
+app.post('/searchResult', function (req, res) {
+    //接收資料
+  entries.push({
+    // searchText: req.body.searchText.value,
+    searchNumber: req.body.searchNumber
+	});
+
+  res.redirect('test')
+  res.render('test')
+})
 
 // API
 var api = require('./apiroutes'); 
@@ -84,16 +140,10 @@ app.use('/api', api);
 var v2 = require('./v2routes'); 
 app.use('/v2', v2);
 
-// --------------------------- //
-
-
 // 當不知道什麼網頁的時候
 app.use(function(request, response) {
   response.status(404).render("404");
 });
-
-// --------------------------- //
-
 
 // 設定 port 為 3000
 http.createServer(app).listen(3000, function() {
