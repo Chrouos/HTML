@@ -19,3 +19,8 @@
 > 4. 開始進行解密過程，過程必須交流才可能通關
 
 ![image](https://user-images.githubusercontent.com/56072039/150492558-17688cc1-b622-4358-b9b4-507ab687b616.png)
+
+# Start
+```
+node app.js
+```
